@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itprotopics.wsclients.ConvertTemperatureClient;
 
-import net.webservicex.ConvertTempResponse;
 import net.webservicex.ConvertTemperatureSoap;
 import net.webservicex.TemperatureUnit;
 
