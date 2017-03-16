@@ -3,8 +3,7 @@ package com.itprotopics;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.itprotopics.wsclients.ConvertTemperatureClient;
-
+import net.webservicex.ConvertTemperatureSoap;
 import net.webservicex.TemperatureUnit;
 
 /**
@@ -17,12 +16,17 @@ public class App
     {
     	Double retValue;
     	
-    	ApplicationContext context = new ClassPathXmlApplicationContext(
+    	@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"config/application-context.xml");
+    	
+    	ConvertTemperatureSoap convertTemperature = null;
+    	
 
-    	ConvertTemperatureClient tempClient = (ConvertTemperatureClient) context.getBean("convertTemperatureClient");
+    	convertTemperature = (ConvertTemperatureSoap) context.getBean("convertTemperature");
 		
-    	retValue = tempClient.convert(TemperatureUnit.DEGREE_CELSIUS, TemperatureUnit.DEGREE_FAHRENHEIT, 30.4);
+    	retValue =  convertTemperature.convertTemp(30.4, TemperatureUnit.DEGREE_CELSIUS, TemperatureUnit.DEGREE_FAHRENHEIT);
+    	
     
     	System.out.println("RetVal = " + retValue );
     	
